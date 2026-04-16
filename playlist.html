@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Developer Playlist</title>
+  <style>
+    :root {
+      --bg: #101420;
+      --card: #15203d;
+      --accent: #6c8cff;
+      --accent-strong: #97b7ff;
+      --text: #eef2ff;
+      --muted: #9cadca;
+      --border: rgba(255,255,255,0.08);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Inter', system-ui, sans-serif;
+      background: radial-gradient(circle at top, #202a46 0%, #0c1120 55%);
+      color: var(--text);
+    }
+
+    .page {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 20px 40px;
+    }
+
+    header {
+      text-align: center;
+      padding: 28px 16px 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      letter-spacing: 0.04em;
+      color: var(--accent);
+    }
+
+    header p {
+      margin: 14px auto 0;
+      max-width: 720px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin: 28px auto 22px;
+      max-width: 760px;
+    }
+
+    .controls input {
+      flex: 1 1 240px;
+      min-width: 180px;
+      padding: 14px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      outline: none;
+      font-size: 0.98rem;
+    }
+
+    .controls button {
+      border: none;
+      border-radius: 999px;
+      padding: 14px 22px;
+      background: var(--accent);
+      color: #fff;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+
+    .controls button:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+    }
+
+    .playlist {
+      display: grid;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .track {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .track:hover {
+      background: rgba(108,140,255,0.08);
+      transform: translateY(-1px);
+    }
+
+    .track.active {
+      border-color: rgba(108,140,255,0.32);
+      background: rgba(108,140,255,0.16);
+    }
+
+    .track-info {
+      display: grid;
+      gap: 6px;
+    }
+
+    .track-name {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .track-details {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .track-meta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      color: var(--text);
+      white-space: nowrap;
+      font-size: 0.95rem;
+    }
+
+    .track-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+    }
+
+    .track-meta .duration {
+      font-weight: 700;
+      color: var(--accent-strong);
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 28px;
+      border-radius: 18px;
+      outline: none;
+      background: rgba(255,255,255,0.06);
+    }
+
+    footer {
+      margin-top: 32px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 640px) {
+      .track {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .track-meta {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>Developer Playlist</h1>
+      <p>Browse a curated list of tracks, search by title or artist, and tap any song to preview it instantly. This page is built for easy developer customization.</p>
+    </header>
+
+    <div class="controls">
+      <input id="search" type="search" placeholder="Search songs, artists, or genre" aria-label="Search playlist" />
+      <button id="shuffle">Shuffle Tracks</button>
+    </div>
+
+    <section class="playlist" id="playlist"></section>
+
+    <audio id="player" controls preload="none">
+      <source id="audioSource" src="" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+
+    <footer>Playlist made by developer. Replace sample track URLs with your own MP3 files or streaming source for full playback.</footer>
+  </div>
+
+  <script>
+    const tracks = [
+      { title: 'Midnight Codeflow', artist: 'Neon Pulse', album: 'After Hours', duration: '3:42', genre: 'Synthwave', src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' },
+      { title: 'Binary Sunset', artist: 'Pixel Voyage', album: 'Algorithm Dreams', duration: '4:08', genre: 'Chill Electronica', src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3' },
+      { title: 'Launch Sequence', artist: 'Orbit Beat', album: 'Space Ritual', duration: '3:57', genre: 'Downtempo', src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3' },
+      { title: 'Debugging Groove', artist: 'Syntax Error', album: 'Code & Coffee', duration: '4:21', genre: 'Lofi Hip Hop', src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3' },
+      { title: 'Backlog Breeze', artist: 'Sprint Mode', album: 'Agile Days', duration: '3:35', genre: 'Indie Pop', src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3' }
+    ];
+
+    const playlistEl = document.getElementById('playlist');
+    const searchInput = document.getElementById('search');
+    const shuffleButton = document.getElementById('shuffle');
+    const player = document.getElementById('player');
+    const audioSource = document.getElementById('audioSource');
+    let currentTrackIndex = null;
+
+    function renderPlaylist(items) {
+      playlistEl.innerHTML = items.map((track, index) => {
+        return `
+          <article class="track" data-index="${index}">
+            <div class="track-info">
+              <h3 class="track-name">${track.title}</h3>
+              <p class="track-details">${track.artist} · ${track.album}</p>
+            </div>
+            <div class="track-meta">
+              <span>${track.genre}</span>
+              <span class="duration">${track.duration}</span>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      playlistEl.querySelectorAll('.track').forEach(trackEl => {
+        trackEl.addEventListener('click', () => {
+          const index = Number(trackEl.dataset.index);
+          playTrack(index, items);
+        });
+      });
+    }
+
+    function playTrack(index, items) {
+      const selected = items[index];
+      if (!selected) return;
+      currentTrackIndex = index;
+      const tracksInView = playlistEl.querySelectorAll('.track');
+      tracksInView.forEach((trackEl, idx) => trackEl.classList.toggle('active', idx === index));
+      audioSource.src = selected.src;
+      player.load();
+      player.play().catch(() => {});
+    }
+
+    function filterTracks(query) {
+      const normalized = query.trim().toLowerCase();
+      if (!normalized) return tracks;
+      return tracks.filter(track => {
+        return [track.title, track.artist, track.album, track.genre].some(value =>
+          value.toLowerCase().includes(normalized)
+        );
+      });
+    }
+
+    searchInput.addEventListener('input', () => {
+      renderPlaylist(filterTracks(searchInput.value));
+    });
+
+    shuffleButton.addEventListener('click', () => {
+      const shuffled = [...tracks].sort(() => Math.random() - 0.5);
+      renderPlaylist(shuffled);
+    });
+
+    renderPlaylist(tracks);
+  </script>
+</body>
+</html>

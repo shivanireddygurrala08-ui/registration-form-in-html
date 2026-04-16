@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saffron Bistro Menu</title>
+  <style>
+    :root {
+      --bg: #f7f2ec;
+      --card: #ffffff;
+      --accent: #d35d2f;
+      --accent-soft: #f2d5c6;
+      --text: #333333;
+      --muted: #6e6056;
+      --border: rgba(211, 93, 47, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(180deg, #faf3ec 0%, #f1e8dd 100%);
+      color: var(--text);
+    }
+
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 28px 20px 40px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 40px 20px;
+      margin-bottom: 24px;
+      background: radial-gradient(circle at top, rgba(211,93,47,0.14) 0%, transparent 45%);
+      border-radius: 28px;
+      border: 1px solid var(--border);
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2.6rem, 3vw, 4rem);
+      letter-spacing: 1px;
+      color: var(--accent);
+    }
+
+    .hero p {
+      margin: 16px auto 0;
+      max-width: 720px;
+      line-height: 1.75;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin: 10px auto 30px;
+      max-width: 760px;
+    }
+
+    .filter-btn {
+      border: 1px solid transparent;
+      background: #fff;
+      color: var(--accent);
+      padding: 12px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .filter-btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent-soft);
+    }
+
+    .filter-btn.active {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(211, 93, 47, 0.14);
+    }
+
+    .menu-section {
+      margin-bottom: 32px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: 1.9rem;
+      letter-spacing: 0.3px;
+      color: var(--accent);
+    }
+
+    .section-header span {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .menu-card {
+      background: var(--card);
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      padding: 24px;
+      min-height: 190px;
+      box-shadow: 0 10px 25px rgba(76, 62, 53, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 30px rgba(76, 62, 53, 0.1);
+    }
+
+    .menu-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.35rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      color: #2f2318;
+    }
+
+    .price {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .menu-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+
+    .menu-card small {
+      display: block;
+      margin-top: 14px;
+      color: #8b7d72;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #7f6d63;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <h1>Saffron Bistro</h1>
+      <p>Explore a chef-crafted menu inspired by seasonal produce, vibrant spices, and timeless comfort dishes. Tap a category to filter the menu instantly.</p>
+      <div class="filters" aria-label="Menu categories">
+        <button class="filter-btn active" data-category="all">All</button>
+        <button class="filter-btn" data-category="starters">Starters</button>
+        <button class="filter-btn" data-category="mains">Mains</button>
+        <button class="filter-btn" data-category="desserts">Desserts</button>
+        <button class="filter-btn" data-category="drinks">Drinks</button>
+      </div>
+    </section>
+
+    <main>
+      <section class="menu-section" data-category="starters">
+        <div class="section-header">
+          <h2>Starters</h2>
+          <span>Fresh beginnings</span>
+        </div>
+        <div class="menu-grid">
+          <article class="menu-card">
+            <h3>Charred Octopus <span class="price">$15</span></h3>
+            <p>Smoky octopus, lemon herb dressing, grilled fennel, and crispy chickpeas.</p>
+            <small>GF</small>
+          </article>
+          <article class="menu-card">
+            <h3>Heirloom Tomato Salad <span class="price">$12</span></h3>
+            <p>Vine-ripened tomatoes, whipped burrata, basil oil, and saba reduction.</p>
+            <small>V</small>
+          </article>
+          <article class="menu-card">
+            <h3>Crispy Brussels Sprouts <span class="price">$11</span></h3>
+            <p>Roasted sprouts with chili honey, toasted almonds, and parmesan.</p>
+            <small>VG</small>
+          </article>
+        </div>
+      </section>
+
+      <section class="menu-section" data-category="mains">
+        <div class="section-header">
+          <h2>Mains</h2>
+          <span>Signature plates</span>
+        </div>
+        <div class="menu-grid">
+          <article class="menu-card">
+            <h3>Pan-Seared Halibut <span class="price">$28</span></h3>
+            <p>Delicate halibut, lemon beurre blanc, spring vegetables, and fingerling potatoes.</p>
+            <small>GF</small>
+          </article>
+          <article class="menu-card">
+            <h3>Spiced Lamb Tagine <span class="price">$26</span></h3>
+            <p>Slow-braised lamb, apricot couscous, preserved lemon, and toasted pistachios.</p>
+            <small></small>
+          </article>
+          <article class="menu-card">
+            <h3>Wild Mushroom Pappardelle <span class="price">$22</span></h3>
+            <p>Fresh pasta, roasted mushrooms, truffle cream, and aged parmesan.</p>
+            <small>V</small>
+          </article>
+        </div>
+      </section>
+
+      <section class="menu-section" data-category="desserts">
+        <div class="section-header">
+          <h2>Desserts</h2>
+          <span>Sweet finales</span>
+        </div>
+        <div class="menu-grid">
+          <article class="menu-card">
+            <h3>Cardamom Creme Brulee <span class="price">$10</span></h3>
+            <p>Silky custard with a caramelized sugar crust and toasted pistachios.</p>
+            <small>GF</small>
+          </article>
+          <article class="menu-card">
+            <h3>Warm Apple Tart <span class="price">$11</span></h3>
+            <p>Butter pastry, cinnamon apples, vanilla ice cream, and salted caramel.</p>
+            <small></small>
+          </article>
+          <article class="menu-card">
+            <h3>Chocolate Hazelnut Mousse <span class="price">$10</span></h3>
+            <p>Dark chocolate mousse, hazelnut crunch, raspberry coulis.</p>
+            <small>V</small>
+          </article>
+        </div>
+      </section>
+
+      <section class="menu-section" data-category="drinks">
+        <div class="section-header">
+          <h2>Drinks</h2>
+          <span>House favorites</span>
+        </div>
+        <div class="menu-grid">
+          <article class="menu-card">
+            <h3>Saffron Iced Tea <span class="price">$6</span></h3>
+            <p>Brewed black tea with saffron, citrus, and a touch of honey.</p>
+            <small>V</small>
+          </article>
+          <article class="menu-card">
+            <h3>Ginger Lemonade <span class="price">$5</span></h3>
+            <p>Fresh lemon, ginger syrup, mint, and sparkling water.</p>
+            <small>V</small>
+          </article>
+          <article class="menu-card">
+            <h3>Espresso Martini <span class="price">$13</span></h3>
+            <p>Espresso, vodka, coffee liqueur, and a hint of vanilla.</p>
+            <small>Contains alcohol</small>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Open daily 11:00 AM – 10:00 PM | 789 Market Lane | Call us at (555) 019-8742</p>
+    </footer>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.filter-btn');
+    const sections = document.querySelectorAll('.menu-section');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        buttons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const category = button.dataset.category;
+
+        sections.forEach(section => {
+          if (category === 'all' || section.dataset.category === category) {
+            section.style.display = '';
+          } else {
+            section.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

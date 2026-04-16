@@ -1,0 +1,155 @@
+  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurant Menu</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(180deg, #f8f3ec 0%, #fffdf8 100%);
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    header {
+      padding: 40px 30px;
+      background: #d96445;
+      color: white;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 3rem;
+      letter-spacing: 1px;
+    }
+    header p {
+      margin: 10px 0 0;
+      font-size: 1.05rem;
+      opacity: 0.95;
+    }
+    .section {
+      padding: 30px;
+    }
+    .section-title {
+      margin-bottom: 20px;
+      font-size: 1.6rem;
+      color: #d96445;
+      border-bottom: 2px solid #f1d7c7;
+      display: inline-block;
+      padding-bottom: 6px;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .menu-item {
+      background: #faf4ef;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: inset 0 0 0 1px rgba(217, 100, 69, 0.08);
+    }
+    .menu-item h3 {
+      margin: 0 0 10px;
+      font-size: 1.25rem;
+    }
+    .menu-item p {
+      margin: 0 10px 0 0;
+      color: #666;
+      line-height: 1.5;
+    }
+    .price {
+      float: right;
+      font-weight: 700;
+      color: #d96445;
+    }
+    .menu-item small {
+      display: block;
+      margin-top: 12px;
+      color: #8a7b6b;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.95rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>La Belle Table</h1>
+      <p>Seasonal favorites, crafted with fresh ingredients and bold flavors.</p>
+    </header>
+
+    <section class="section">
+      <div class="section-title">Starters</div>
+      <div class="menu-grid">
+        <div class="menu-item">
+          <h3>Roasted Beet Salad <span class="price">$12</span></h3>
+          <p>Mixed greens, goat cheese, candied pecans, blood orange vinaigrette.</p>
+        </div>
+        <div class="menu-item">
+          <h3>Truffle Mushroom Soup <span class="price">$10</span></h3>
+          <p>Creamy wild mushroom consommé, truffle oil, crispy shallots.</p>
+        </div>
+        <div class="menu-item">
+          <h3>Garlic Shrimp Crostini <span class="price">$14</span></h3>
+          <p>Grilled shrimp, garlic butter, lemon zest, toasted baguette.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">Mains</div>
+      <div class="menu-grid">
+        <div class="menu-item">
+          <h3>Pan-Seared Salmon <span class="price">$24</span></h3>
+          <p>Herb quinoa, roasted asparagus, citrus beurre blanc.</p>
+        </div>
+        <div class="menu-item">
+          <h3>Braised Short Rib <span class="price">$28</span></h3>
+          <p>Mashed parsnips, red wine jus, baby carrots.</p>
+        </div>
+        <div class="menu-item">
+          <h3>Wild Mushroom Risotto <span class="price">$20</span></h3>
+          <p>Arborio rice, parmesan, thyme, shaved black truffle.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">Desserts</div>
+      <div class="menu-grid">
+        <div class="menu-item">
+          <h3>Vanilla Bean Panna Cotta <span class="price">$9</span></h3>
+          <p>Berry compote, almond crumble, mint.</p>
+        </div>
+        <div class="menu-item">
+          <h3>Chocolate Lava Cake <span class="price">$11</span></h3>
+          <p>Warm mousse center, raspberry coulis, whipped cream.</p>
+        </div>
+        <div class="menu-item">
+          <h3>Seasonal Fruit Tart <span class="price">$10</span></h3>
+          <p>Citrus pastry cream, fresh berries, flaky crust.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Open daily from 11:00 AM to 10:00 PM | 123 Culinary Avenue</p>
+    </footer>
+  </div>
+</body>
+</html>
